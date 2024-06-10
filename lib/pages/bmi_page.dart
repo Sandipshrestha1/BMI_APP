@@ -11,30 +11,33 @@ class BMIPage extends StatefulWidget {
 
 class _BMIPageState extends State<BMIPage> {
   double? _deviceHeight, _deviceWidth;
-  int _age = 26, _weight = 75;
+  int _age = 26, _weight = 75, _height = 70;
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
-    return CupertinoPageScaffold(
-      child: Container(
-        height: _deviceHeight! * 0.85,
-        color: Colors.white,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _ageSelectContainer(),
-                _weightSelectContainer(),
-              ],
-            )
-          ],
+    return SingleChildScrollView(
+      child: CupertinoPageScaffold(
+        child: Container(
+          height: _deviceHeight! * 0.85,
+          color: Colors.white,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _ageSelectContainer(),
+                  _weightSelectContainer(),
+                ],
+              ),
+              _heightSelectContainer(),
+            ],
+          ),
         ),
       ),
     );
@@ -145,6 +148,45 @@ class _BMIPageState extends State<BMIPage> {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _heightSelectContainer() {
+    return InfoCard(
+      height: _deviceHeight! * 0.15,
+      width: _deviceWidth! * 0.90,
+      child: Column(
+        children: [
+          const Text(
+            "Height in ",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const Text(
+            "70 ",
+            style: TextStyle(
+              fontSize: 45,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          SizedBox(
+            width: _deviceWidth! * 0.80,
+            child: CupertinoSlider(
+              min: 0,
+              max: 100,
+              divisions: 100,
+              value: _height.toDouble(),
+              onChanged: (_value) {
+                setState(() {
+                  _height = _value.toInt();
+                });
+              },
+            ),
           ),
         ],
       ),
