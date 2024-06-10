@@ -13,14 +13,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final List<Widget> _tabs = [
-    BMIPage(),
-    HistoryPage(),
+    const BMIPage(),
+    const HistoryPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text("IBMI"),
       ),
       child: CupertinoTabScaffold(
